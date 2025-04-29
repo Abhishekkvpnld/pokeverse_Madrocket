@@ -5,6 +5,7 @@ import LoadingComponents from "./components/LoadingComponent";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const PokemonList = lazy(() => import("./pages/PokemonList"));
+const NotFound = lazy(()=>import("./components/PageNotFound"))
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/list" element={<PokemonList />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
     </Router>

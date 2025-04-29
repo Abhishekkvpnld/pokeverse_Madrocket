@@ -6,7 +6,7 @@ const apiUrl = import.meta.env.VITE_POKEMON_API;
 export const fetchAll = async () => {
   try {
     const res = await axios.get(`${apiUrl}/pokemon?limit=150`);
-    return { data: res.data };
+    return { data: res?.data };
   } catch (error) {
     console.error(error);
     return { data: [] };
@@ -28,7 +28,7 @@ export const fetchDetails = async (name) => {
 export const fetchDataUrl = async (url) => {
   try {
     const res = await axios.get(url);
-    return { data: res.data };
+    return { data: res?.data };
   } catch (error) {
     console.error(error);
     return { data: [] };

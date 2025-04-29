@@ -1,18 +1,8 @@
-import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
 import { IoSearchOutline } from "react-icons/io5";
 import ImageCard from "./ImageCard";
 
-const Navbar = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const params = new URLSearchParams(location.search);
-  const [search, setSearch] = useState(params.get("search") || "");
+const Navbar = ({ search, setSearch }) => {
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    navigate(`/pokemon?search=${search}`);
-  };
 
   return (
     <nav className="w-full flex justify-between items-center p-3 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 shadow-lg sticky top-0 z-50">
@@ -21,7 +11,6 @@ const Navbar = () => {
 
       {/* Search Form */}
       <form
-        onSubmit={handleSearch}
         className="flex items-center bg-white rounded-full px-3 py-1 shadow-md transition-all focus-within:ring-2 focus-within:ring-pink-300"
       >
         <input
