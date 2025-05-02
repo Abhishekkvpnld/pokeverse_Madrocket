@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft, FaBalanceScale } from "react-icons/fa";
 
 const Stats = ({ pokemon }) => {
     const navigate = useNavigate();
@@ -35,9 +35,9 @@ const Stats = ({ pokemon }) => {
 
                     <button
                         onClick={handleCompare}
-                        className="mt-3 px-4 py-2 bg-blue-500 text-white rounded-xl hover:bg-blue-700 transition"
+                        className="mt-3 flex items-center gap-2 justify-center px-4 py-2 bg-blue-500 text-white rounded-xl hover:bg-blue-700 transition"
                     >
-                        Compare
+                        <FaBalanceScale size={20} /> Compare
                     </button>
 
                     <div className="mt-3 flex items-center justify-center gap-2">
@@ -73,10 +73,10 @@ const Stats = ({ pokemon }) => {
                                     className="flex mt-2 bg-slate-300 rounded-2xl hover:bg-blue-500 hover:shadow-2xl items-center justify-between px-4"
                                 >
                                     <p className="px-3 py-2 font-medium text-gray-700 hover:text-white">
-                                        {statObj.stat.name}
+                                        {statObj?.stat.name}
                                     </p>
                                     <p className="px-3 py-2 rounded-full bg-white text-gray-600">
-                                        {statObj.base_stat}
+                                        {statObj?.base_stat}
                                     </p>
                                 </div>
                             ))}

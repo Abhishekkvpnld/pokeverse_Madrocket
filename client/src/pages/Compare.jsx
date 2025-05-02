@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { fetchAll, fetchDetails } from "../api/Api";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
@@ -8,6 +8,10 @@ const Compare = () => {
     const [allPokemon, setAllPokemon] = useState([]);
     const [secondPokemon, setSecondPokemon] = useState(null);
     const [loading, setLoading] = useState(true);
+
+
+    const comparisonRef = useRef(null);
+
 
     // Load first Pokémon from localStorage
     useEffect(() => {
@@ -35,10 +39,14 @@ const Compare = () => {
         try {
             const { data } = await fetchDetails(name);
             setSecondPokemon(data);
+            setTimeout(() => {
+                comparisonRef.current?.scrollIntoView({ behavior: "smooth" });
+            }, 100);
         } catch (error) {
             console.error("Error fetching second Pokémon:", error);
         }
     };
+    
 
     if (loading) {
         return (
@@ -55,7 +63,13 @@ const Compare = () => {
             <div className="min-h-screen bg-slate-100 p-4">
                 <div className="flex justify-between items-center mb-4">
                     <h1 className="text-2xl font-bold text-gray-700">Compare Pokémon</h1>
-                    <Link to="/list" className="text-blue-500 underline hover:text-blue-700">← Back to List</Link>
+                    <Link
+                        to="/list"
+                        className="text-sm text-blue-600 hover:text-blue-800 transition"
+                    >
+                        ← Back to List
+                    </Link>
+
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -80,14 +94,18 @@ const Compare = () => {
                     <div className="bg-white p-4 rounded-xl shadow-lg">
                         <h2 className="text-lg font-semibold text-gray-600 mb-2">Choose Pokémon to Compare</h2>
                         <div className="flex flex-wrap gap-2 max-h-[300px] overflow-y-auto">
-                            {allPokemon.map((poke) => (
+                            {allPokemon?.map((poke) => (
                                 <button
-                                    key={poke.name}
-                                    className="bg-blue-100 text-blue-700 px-3 py-1 rounded-lg text-sm hover:bg-blue-300 transition"
-                                    onClick={() => handleSelectSecond(poke.name)}
+                                    key={poke?.name}
+                                    className={`px-3 py-1 rounded-lg text-sm transition
+                                  ${selectedPokemon?.name === poke?.name ? 'bg-gray-300 text-gray-500 cursor-not-allowed' : 'bg-blue-100 text-blue-700 hover:bg-blue-300'}
+                              `}
+                                    onClick={() => handleSelectSecond(poke?.name)}
+                                    disabled={selectedPokemon?.name === poke?.name}
                                 >
-                                    {poke.name}
+                                    {poke?.name}
                                 </button>
+
                             ))}
                         </div>
                     </div>
@@ -95,7 +113,7 @@ const Compare = () => {
 
                 {/* Comparison Section */}
                 {secondPokemon && (
-                    <div className="mt-10 bg-white p-6 rounded-xl shadow-md">
+                    <div ref={comparisonRef} className="mt-10 bg-white p-6 rounded-xl shadow-md">
                         <h2 className="text-xl font-bold text-center mb-6">Comparison Result</h2>
                         <div className="grid grid-cols-2 gap-6">
                             {[selectedPokemon, secondPokemon].map((poke, idx) => (

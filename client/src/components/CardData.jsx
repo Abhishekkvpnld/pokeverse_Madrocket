@@ -18,6 +18,9 @@ const CardData = ({ data, details }) => {
     return favorites.some((p) => p.name === data?.name);
   }, [favorites, data?.name]);
 
+
+
+
   // Handle toggle favorite
   const handleFavoriteClick = useCallback(() => {
     if (isFavorite) {
@@ -28,6 +31,8 @@ const CardData = ({ data, details }) => {
       toast.success(`${data.name} added to favorites`);
     }
   }, [isFavorite, data, details, addToFavorites, removeFromFavorites]);
+
+
 
   // Handle compare
   const handleCompareClick = useCallback(() => {
@@ -70,7 +75,7 @@ const CardData = ({ data, details }) => {
       </div>
 
       {/* Buttons */}
-      <div className="flex items-center gap-2 justify-end w-full px-4 py-2">
+      <div className="flex items-center gap-2 justify-between w-full px-4 py-2">
         {/* Favorite */}
         <button
           onClick={handleFavoriteClick}
@@ -78,18 +83,9 @@ const CardData = ({ data, details }) => {
           title={isFavorite ? "Remove from Favorites" : "Add to Favorites"}
           aria-label="Toggle Favorite"
         >
-          <FaHeart size={17} />
+          <FaHeart size={20} />
         </button>
 
-        {/* Compare */}
-        <button
-          onClick={handleCompareClick}
-          className="text-black hover:text-red-500 transition"
-          title="Compare Pokémon"
-          aria-label="Compare Pokémon"
-        >
-          <FaBalanceScale size={17} />
-        </button>
 
         {/* Details */}
         <Link
@@ -98,7 +94,7 @@ const CardData = ({ data, details }) => {
           title="View Details"
           aria-label="View Details"
         >
-          <CiLocationArrow1 size={17} />
+          <CiLocationArrow1 size={20} />
         </Link>
       </div>
     </div>
