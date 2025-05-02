@@ -1,7 +1,7 @@
 import { CiLocationArrow1 } from "react-icons/ci";
 import { FaBalanceScale, FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { usePokemon } from "../context/PokemonContext"; // adjust path as needed
+import { usePokemon } from "../context/PokeContext"; // adjust path as needed
 import { useCallback, useMemo } from "react";
 import toast from "react-hot-toast";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { usePokemon } from "../context/PokemonContext";
+import { usePokemon } from "../context/PokeContext";
 import Card from "../components/Card"; 
 import EmptyCard from "../components/EmptyCard"; 
 import Navbar from "../components/Navbar";
